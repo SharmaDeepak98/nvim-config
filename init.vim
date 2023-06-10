@@ -1,13 +1,16 @@
 call plug#begin("~/.vim/plugged")
   " Theme
   Plug 'dracula/vim'
-
+Plug 'dsznajder/vscode-es7-javascript-react-snippets', { 'do': 'yarn install --frozen-lockfile && yarn compile' }
   " Language Client
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   let g:coc_global_extensions = ['coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver']
   " TypeScript Highlighting
   Plug 'leafgarland/typescript-vim'
   Plug 'peitalin/vim-jsx-typescript'
+"Plug 'nvim-tree/nvim-web-devicons'
+"Plug 'ryanoasis/vim-devicons'
+Plug 'mattn/emmet-vim'
 
 
   " File Explorer with Icons
@@ -23,6 +26,9 @@ call plug#end()
 if (has("termguicolors"))
  set termguicolors
 endif
+
+set guifont=DroidSansMono\ Nerd\ Font:h11
+set encoding=UTF-8
 
 " Theme
 syntax enable
@@ -59,11 +65,13 @@ tnoremap <A-h> <C-\><C-n><C-w>h
 tnoremap <A-j> <C-\><C-n><C-w>j
 tnoremap <A-k> <C-\><C-n><C-w>k
 tnoremap <A-l> <C-\><C-n><C-w>l
-nnoremap <A-h> <C-w>h
-nnoremap <A-j> <C-w>j
-nnoremap <A-k> <C-w>k
-nnoremap <A-l> <C-w>l
+nnoremap <c-h> <C-w>h
+nnoremap <c-j> <C-w>j
+nnoremap <c-k> <C-w>k
+nnoremap <c-l> <C-w>l
 
+inoremap jk <Esc>
+inoremap ll; <Esc>A
 " start terminal in insert mode
 au BufEnter * if &buftype == 'terminal' | :startinsert | endif
 
@@ -73,5 +81,6 @@ function! OpenTerminal()
   split term://bash
   resize 10
 endfunction
-nnoremap <c-n> :call OpenTerminal()<CR>
+nnoremap <c-n> :NERDTreeToggle<CR>
+
 
