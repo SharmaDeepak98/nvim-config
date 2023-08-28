@@ -9,9 +9,8 @@ Plug 'dsznajder/vscode-es7-javascript-react-snippets', { 'do': 'yarn install --f
   Plug 'leafgarland/typescript-vim'
   Plug 'peitalin/vim-jsx-typescript'
 "Plug 'nvim-tree/nvim-web-devicons'
-"Plug 'ryanoasis/vim-devicons'
 Plug 'mattn/emmet-vim'
-
+Plug 'mhinz/vim-startify'
 
   " File Explorer with Icons
   Plug 'scrooloose/nerdtree'
@@ -21,6 +20,9 @@ Plug 'mattn/emmet-vim'
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
 call plug#end()
+let g:user_emmet_expandabbr_key = '<Tab>'
+
+set relativenumber
 
 " Enable theming support
 if (has("termguicolors"))
@@ -70,8 +72,14 @@ nnoremap <c-j> <C-w>j
 nnoremap <c-k> <C-w>k
 nnoremap <c-l> <C-w>l
 
+
+"autocompletion
+inoremap <expr> <Tab> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"
+inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"
+inoremap <silent><expr> <cr> coc#pum#visible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
+
 inoremap jk <Esc>
-inoremap ll; <Esc>A
+inoremap ;; <Esc>A
 " start terminal in insert mode
 au BufEnter * if &buftype == 'terminal' | :startinsert | endif
 
