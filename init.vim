@@ -4,25 +4,31 @@ call plug#begin("~/.vim/plugged")
 Plug 'dsznajder/vscode-es7-javascript-react-snippets', { 'do': 'yarn install --frozen-lockfile && yarn compile' }
   " Language Client
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  let g:coc_global_extensions = ['coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver']
   " TypeScript Highlighting
   Plug 'leafgarland/typescript-vim'
   Plug 'peitalin/vim-jsx-typescript'
 "Plug 'nvim-tree/nvim-web-devicons'
 Plug 'mattn/emmet-vim'
 Plug 'mhinz/vim-startify'
-
+Plug 'tpope/vim-commentary'
   " File Explorer with Icons
   Plug 'scrooloose/nerdtree'
   Plug 'ryanoasis/vim-devicons'
-
-  " File Search
+ " post install (yarn install | npm install) then load plugin only for editing supported files
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install --frozen-lockfile --production',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html'] } 
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
 call plug#end()
 let g:user_emmet_expandabbr_key = '<Tab>'
 
+  let g:coc_global_extensions = ['coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver']
 set relativenumber
+
+
+
+
 
 " Enable theming support
 if (has("termguicolors"))
@@ -90,5 +96,7 @@ function! OpenTerminal()
   resize 10
 endfunction
 nnoremap <c-n> :NERDTreeToggle<CR>
-
-
+let g:mapleader = ","
+nnoremap <leader><leader> :b#<CR>
+nmap <leader>. gcc
+vmap <leader>. gc
